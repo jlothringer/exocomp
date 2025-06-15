@@ -1,6 +1,5 @@
 numpy
 scipy
-random
 matplotlib
 nbsphinx
 sphinx-autoapi
