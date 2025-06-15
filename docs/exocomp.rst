@@ -1,7 +1,7 @@
 exocomp module
 ==============
 
-.. automodule:: exocomp
+.. automodule:: exocomp.exocomp
    :members:
    :undoc-members:
    :show-inheritance:
