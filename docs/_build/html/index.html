@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to ExoComp! &mdash; ExoComp 0.1.0 documentation</title>
+  <title>Welcome to ExoComp! &mdash; exocomp 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -16,11 +16,10 @@
       <script src="_static/documentation_options.js?v=01f34227"></script>
       <script src="_static/doctools.js?v=888ff710"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ExoComp" href="modules.html" /> 
+    <link rel="next" title="exocomp" href="modules.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,7 +31,7 @@
           
           
           <a href="#" class="icon icon-home">
-            ExoComp
+            exocomp
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -44,7 +43,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">ExoComp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">exocomp</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://jlothringer.github.io/exoplanet_datatable.html">The ExoComp Table</a></li>
 </ul>
 
@@ -54,7 +53,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">ExoComp</a>
+          <a href="#">exocomp</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -79,38 +78,27 @@
 <p>Exocomp is a toolkit with functions and utilities for normalizing measurements from different retrievals of exoplanets and brown dwarfs. Features include:</p>
 <ul class="simple">
 <li><p>Conversions between volume mixing ratio and mass fraction (and vice versa).</p></li>
-<li><p>Conversions in bulk abundances between different definitions of solar composition (or between defintiions of host star abundances).</p></li>
+<li><p>Conversions in bulk abundances between different definitions of solar composition (or between definitions of host star abundances).</p></li>
 <li><p>Conversions from metallicity, C/O, and refractory-to-volatile ratios to elemental abundance ratios.</p></li>
 <li><p>Fitting of metallicity, C/O, and refractory-to-volatile ratios to sets of atomic and molecular abundances.</p></li>
+<li><p>Calculation of equilibrium molecular abundances for desired species given metallicity, C/O ratio, temperature, and pressure.</p></li>
 </ul>
-<p>Available solar abundance defintions include:</p>
+<p>All of the above can be easily done with different solar (or stellar) abundance definitions. Available solar abundance defintions include:</p>
 <ul class="simple">
-<li><p>Lodders 2025</p></li>
-<li><p>Lodders 2020</p></li>
-<li><p>Lodders 2010</p></li>
-<li><p>Asplund 2021</p></li>
-<li><p>Asplund 2009</p></li>
-<li><p>Asplund 2005</p></li>
-<li><p>Caffau 2011</p></li>
+<li><p>Lodders+ 2025</p></li>
+<li><p>Lodders+ 2020</p></li>
+<li><p>Lodders+ 2010</p></li>
+<li><p>Asplund+ 2021</p></li>
+<li><p>Asplund+ 2009</p></li>
+<li><p>Asplund+ 2005</p></li>
+<li><p>Caffau+ 2011</p></li>
 </ul>
-<p>POSEIDON’s official features currently include:</p>
-<ul class="simple">
-<li><p>Transmission spectra modelling and retrievals for 1D, 2D, and 3D exoplanet atmospheres.</p></li>
-<li><p>Emission and reflection spectra, including scattering, for modelling and retrievals.</p></li>
-<li><p>Rapid atmospheric retrievals that can run on your laptop.</p></li>
-<li><p>Model planets ranging from ultra-hot Jupiters to temperate terrestrials.</p></li>
-<li><p>Parametric prescriptions for stellar contamination, multidimensional clouds, and more.</p></li>
-<li><p>High-resolution line-by-line models (<span class="math notranslate nohighlight">\(R \sim 10^6\)</span>) for cross correlation analyses.</p></li>
-<li><p>Modelling and retrievals for brown dwarfs and directly imaged exoplanets.</p></li>
-<li><p>NEW: High-resolution cross correlation retrievals for ground-based exoplanet datasets.</p></li>
-</ul>
-<p>POSEIDON contains an extensive range of tutorials covering forward models and
-retrievals for a wide variety of different applications.</p>
+<p>We also have compiled the ExoComp Table, which lists metallicity, C/O, and refractory-to-volatile measurements from retrievals of exoplanets from direct, eclipse, and transmission spectroscopy.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">ExoComp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ExoComp.html">ExoComp module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">exocomp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exocomp.html">exocomp module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference external" href="https://jlothringer.github.io/exoplanet_datatable.html">The ExoComp Table</a></li>
@@ -130,7 +118,7 @@ retrievals for a wide variety of different applications.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="modules.html" class="btn btn-neutral float-right" title="ExoComp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="exocomp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

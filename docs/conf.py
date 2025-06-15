@@ -7,12 +7,12 @@ import os
 import sys
 
 # Add your project path so Sphinx can find your modules
-sys.path.insert(0, os.path.abspath('/Users/jlothringer/Research/ExoComp/'))  # Adjust path to your source code
+sys.path.insert(0, os.path.abspath('/Users/jlothringer/Research/exocomp/exocomp/'))  # Adjust path to your source code
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'ExoComp'
+project = 'exocomp'
 copyright = '2025, Joshua D. Lothringer'
 author = 'Joshua D. Lothringer'
 release = '0.1.0'
@@ -20,7 +20,7 @@ release = '0.1.0'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store','html','test']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store','html']
 
 # -- General configuration ---------------------------------------------------
 extensions = [

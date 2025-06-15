@@ -16,34 +16,22 @@ Welcome to ExoComp!
 Exocomp is a toolkit with functions and utilities for normalizing measurements from different retrievals of exoplanets and brown dwarfs. Features include:
 
 * Conversions between volume mixing ratio and mass fraction (and vice versa).
-* Conversions in bulk abundances between different definitions of solar composition (or between defintiions of host star abundances).
+* Conversions in bulk abundances between different definitions of solar composition (or between definitions of host star abundances).
 * Conversions from metallicity, C/O, and refractory-to-volatile ratios to elemental abundance ratios.
 * Fitting of metallicity, C/O, and refractory-to-volatile ratios to sets of atomic and molecular abundances.
+* Calculation of equilibrium molecular abundances for desired species given metallicity, C/O ratio, temperature, and pressure.
 
-Available solar abundance defintions include:
+All of the above can be easily done with different solar (or stellar) abundance definitions. Available solar abundance defintions include:
 
-* Lodders 2025
-* Lodders 2020
-* Lodders 2010
-* Asplund 2021
-* Asplund 2009
-* Asplund 2005
-* Caffau 2011
+* Lodders+ 2025
+* Lodders+ 2020
+* Lodders+ 2010
+* Asplund+ 2021
+* Asplund+ 2009
+* Asplund+ 2005
+* Caffau+ 2011
 
-POSEIDON's official features currently include:
-
-* Transmission spectra modelling and retrievals for 1D, 2D, and 3D exoplanet atmospheres.
-* Emission and reflection spectra, including scattering, for modelling and retrievals.
-* Rapid atmospheric retrievals that can run on your laptop.
-* Model planets ranging from ultra-hot Jupiters to temperate terrestrials.
-* Parametric prescriptions for stellar contamination, multidimensional clouds, and more.
-* High-resolution line-by-line models (:math:`R \sim 10^6`) for cross correlation analyses.
-* Modelling and retrievals for brown dwarfs and directly imaged exoplanets.
-* NEW: High-resolution cross correlation retrievals for ground-based exoplanet datasets.
-
-
-POSEIDON contains an extensive range of tutorials covering forward models and 
-retrievals for a wide variety of different applications.
+We also have compiled the ExoComp Table, which lists metallicity, C/O, and refractory-to-volatile measurements from retrievals of exoplanets from direct, eclipse, and transmission spectroscopy.
   
 .. toctree::
    :maxdepth: 2

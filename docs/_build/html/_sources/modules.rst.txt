@@ -1,7 +1,7 @@
-ExoComp
-====================
+exocomp
+=======
 
 .. toctree::
    :maxdepth: 4
 
-   ExoComp
+   exocomp

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ExoComp &mdash; ExoComp 0.1.0 documentation</title>
+  <title>exocomp &mdash; exocomp 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -29,7 +29,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            ExoComp
+            exocomp
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -41,7 +41,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">ExoComp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">exocomp</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://jlothringer.github.io/exoplanet_datatable.html">The ExoComp Table</a></li>
 </ul>
 
@@ -51,7 +51,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">ExoComp</a>
+          <a href="../index.html">exocomp</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -60,7 +60,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
-      <li class="breadcrumb-item active">ExoComp</li>
+      <li class="breadcrumb-item active">exocomp</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -69,7 +69,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for ExoComp</h1><div class="highlight"><pre>
+  <h1>Source code for exocomp</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -126,7 +126,7 @@
 
 
 <div class="viewcode-block" id="Abund">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund">[docs]</a>
 <span class="k">class</span> <span class="nc">Abund</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Top-level class for abundance calculations.</span>
@@ -211,7 +211,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     
 <div class="viewcode-block" id="Abund.__init__">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.__init__">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bulk_abunds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">species_abunds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
                  <span class="n">bulk_errs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">species_errs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
                  <span class="n">species_type</span><span class="o">=</span><span class="s1">&#39;VMR&#39;</span><span class="p">,</span> 
@@ -315,7 +315,7 @@
 
                 
 <div class="viewcode-block" id="Abund.define_stellar">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.define_stellar">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.define_stellar">[docs]</a>
     <span class="k">def</span> <span class="nf">define_stellar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">abund_dict</span><span class="p">):</span>
         <span class="c1">#will use self.solar as backup</span>
 
@@ -325,7 +325,7 @@
 
     
 <div class="viewcode-block" id="Abund.VMR_to_MMR">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.VMR_to_MMR">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.VMR_to_MMR">[docs]</a>
     <span class="k">def</span> <span class="nf">VMR_to_MMR</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vmr_dict</span><span class="p">,</span> <span class="n">mmw</span><span class="o">=</span><span class="mf">2.3</span><span class="p">,</span> <span class="n">replace_abunds</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">import_masses</span><span class="p">()</span>
         <span class="n">mmr_dict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -340,7 +340,7 @@
 
     
 <div class="viewcode-block" id="Abund.MMR_to_VMR">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.MMR_to_VMR">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.MMR_to_VMR">[docs]</a>
     <span class="k">def</span> <span class="nf">MMR_to_VMR</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mmr_dict</span><span class="p">,</span> <span class="n">mmw</span><span class="o">=</span><span class="mf">2.3</span><span class="p">,</span> <span class="n">replace_abunds</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">import_masses</span><span class="p">()</span>
         <span class="n">vmr_dict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -355,7 +355,7 @@
 
     
 <div class="viewcode-block" id="Abund.convert_bulk_abundance">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.convert_bulk_abundance">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.convert_bulk_abundance">[docs]</a>
     <span class="k">def</span> <span class="nf">convert_bulk_abundance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mh</span><span class="p">,</span><span class="n">co</span><span class="p">,</span><span class="n">rv</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">mh_err</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">co_err</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">rv_err</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">solar</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert bulk abundance parameters to elemental abundances with error propagation.</span>
 <span class="sd">        </span>
@@ -363,6 +363,7 @@
 <span class="sd">        and refractory enhancement) into individual elemental abundances relative to hydrogen.</span>
 <span class="sd">        It supports both symmetric/asymmetric error propagation and posterior sampling for </span>
 <span class="sd">        uncertainty quantification.</span>
+<span class="sd">        </span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -583,7 +584,7 @@
 
 
 <div class="viewcode-block" id="Abund.convert_solar">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.convert_solar">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.convert_solar">[docs]</a>
     <span class="k">def</span> <span class="nf">convert_solar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">convert_to</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert existing bulk abundances to a different solar abundance reference.</span>
 
@@ -710,7 +711,7 @@
     
 
 <div class="viewcode-block" id="Abund.init_ec">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.init_ec">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.init_ec">[docs]</a>
     <span class="k">def</span> <span class="nf">init_ec</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Function to initialize easyCHEM with the elemental abundances from the</span>
@@ -742,13 +743,13 @@
     
     
 <div class="viewcode-block" id="Abund.predict_abund">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.predict_abund">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.predict_abund">[docs]</a>
     <span class="k">def</span> <span class="nf">predict_abund</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mh</span><span class="p">,</span><span class="n">co</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">species</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;H2O&#39;</span><span class="p">,</span><span class="s1">&#39;CO&#39;</span><span class="p">,</span><span class="s1">&#39;CO2&#39;</span><span class="p">],</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                       <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;VMR&#39;</span><span class="p">,</span> <span class="n">adjust_C</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Predict molecular abundances from bulk parameters and atmospheric conditions.</span>
 <span class="sd">        </span>
 <span class="sd">        Calculates equilibrium molecular abundances for specified species given </span>
-<span class="sd">        metallicity, C/O ratio, temperature, and pressure using thermochemical equilibrium.</span>
+<span class="sd">        metallicity, C/O ratio, temperature, and pressure.</span>
 <span class="sd">        Uses the definition of solar in self.solar!</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -818,7 +819,7 @@
 
     
 <div class="viewcode-block" id="Abund.convert_species_abunds">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.convert_species_abunds">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.convert_species_abunds">[docs]</a>
     <span class="k">def</span> <span class="nf">convert_species_abunds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">adjust_C</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">plot_it</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">posterior_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">fit_refvol</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Fit bulk atmospheric parameters to observed molecular abundances.</span>
@@ -827,6 +828,10 @@
 <span class="sd">        optionally refractory enhancement from observed molecular species abundances</span>
 <span class="sd">        using thermochemical equilibrium modeling. Supports both error propagation</span>
 <span class="sd">        and full posterior sampling.</span>
+<span class="sd">        </span>
+<span class="sd">        IMPORTANT: This assumes chemical equilibrium, of course! Results can be very</span>
+<span class="sd">        sensitive to the assumed T and P. And atmospheres are not necessarily in </span>
+<span class="sd">        equilibrium. Interpret these results with care.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1267,7 +1272,7 @@
 
 
 <div class="viewcode-block" id="Abund.Lodders25">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.Lodders25">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.Lodders25">[docs]</a>
     <span class="k">def</span> <span class="nf">Lodders25</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">solar_abundances</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">12.00</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">),</span>
@@ -1307,7 +1312,7 @@
 
 
 <div class="viewcode-block" id="Abund.Asplund09">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.Asplund09">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.Asplund09">[docs]</a>
     <span class="k">def</span> <span class="nf">Asplund09</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">solar_abundances</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">12.00</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">),</span>
@@ -1347,7 +1352,7 @@
 
 
 <div class="viewcode-block" id="Abund.Lodders20">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.Lodders20">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.Lodders20">[docs]</a>
     <span class="k">def</span> <span class="nf">Lodders20</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">solar_abundances</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="mf">12.00</span><span class="p">,</span>
@@ -1388,7 +1393,7 @@
 
     
 <div class="viewcode-block" id="Abund.Asplund21">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.Asplund21">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.Asplund21">[docs]</a>
     <span class="k">def</span> <span class="nf">Asplund21</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">solar_abundances</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">12.00</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">),</span>
@@ -1464,7 +1469,7 @@
         <span class="k">return</span> <span class="n">solar_abundances</span>
     
 <div class="viewcode-block" id="Abund.Lodders10">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.Lodders10">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.Lodders10">[docs]</a>
     <span class="k">def</span> <span class="nf">Lodders10</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">solar_abundances</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">12.00</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">),</span>
@@ -1504,7 +1509,7 @@
 
     
 <div class="viewcode-block" id="Abund.Caffau11">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.Caffau11">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.Caffau11">[docs]</a>
     <span class="k">def</span> <span class="nf">Caffau11</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1">#Asplund09 fill in the rest</span>
         <span class="n">solar_abundances</span> <span class="o">=</span> <span class="p">{</span>
@@ -1545,7 +1550,7 @@
 
     
 <div class="viewcode-block" id="Abund.import_masses">
-<a class="viewcode-back" href="../ExoComp.html#ExoComp.Abund.import_masses">[docs]</a>
+<a class="viewcode-back" href="../exocomp.html#exocomp.Abund.import_masses">[docs]</a>
     <span class="k">def</span> <span class="nf">import_masses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">molecular_mass</span> <span class="o">=</span> <span class="p">{</span>
             <span class="c1"># Atoms</span>
