@@ -7,7 +7,7 @@ import os
 import sys
 
 # Add your project path so Sphinx can find your modules
-sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../exocomp'))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
