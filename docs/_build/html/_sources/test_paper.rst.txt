@@ -1,0 +1,7 @@
+test\_paper module
+==================
+
+.. automodule:: test_paper
+   :members:
+   :undoc-members:
+   :show-inheritance:
