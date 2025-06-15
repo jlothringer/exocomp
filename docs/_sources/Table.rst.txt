@@ -1,0 +1,5 @@
+Table
+=============
+
+.. raw:: html
+   :file: ../exoplanet_datatable.html
