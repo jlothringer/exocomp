@@ -6,7 +6,11 @@ Created on Fri Jun  6 14:04:20 2025
 @author: jlothringer
 """
 
-import easychem.easychem as ec
+try:
+    import easychem.easychem as ec
+except ImportError:
+    easychem = None #escaping so documentation compiles
+    print('Need to install easychem!')
 from scipy.optimize import curve_fit,fmin
 import numpy as np
 import matplotlib.pyplot as plt
