@@ -1,3 +1,8 @@
+easychem
+numpy
+scipy
+random
+matplotlib
 nbsphinx
 sphinx-autoapi
 sphinx_rtd_theme
