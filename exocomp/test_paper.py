@@ -173,3 +173,25 @@ ax[1,1].hist(bulk[1]['C'])
 #full spectrum
 samples_free = np.genfromtxt('/Users/jlothringer/Research/extreme_irrad/wasp178/evaluate_W178_eqchem_JWST_retrieval_10bin_1000LP_iso_new_offs_hot/W178_eqchem_JWST_retrieval_10bin_1000LP_iso_new_offs_hot_post_equal_weights.dat')
 
+
+##
+## Posterior test
+##
+
+h2o = np.random.random(10000)*-11 -1
+co = np.random.random(10000)*-11 -1
+co2 = np.random.random(10000)*-11 -1
+ch4 = np.random.random(10000)*-11 -1
+na = np.random.random(10000)*-11 -1
+k = np.random.random(10000)*-11 -1
+
+co_ratio = (10**co*1 + 10**co2*1 + 10**ch4*1) / (10**h2o*1+10**co*1+10**co2*2)
+refvol = (10**na+10**k) / (10**h2o*1+10**co*2+10**co2*3+10**ch4*1)
+refvol[np.where(refvol == 0.0)[0]] = 1e-14
+
+figure()
+hist(co_ratio,bins=50,range=(0,1.5))
+
+figure()
+hist(np.log10(refvol),bins=50)
+

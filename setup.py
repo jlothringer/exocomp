@@ -1,10 +1,11 @@
-from setuptools import setup
+from setuptools import setup,find_packages
 import os
 
 setup(
     name='exocomp',
     version='0.1.0',
-    py_modules=['exocomp'],
+#    py_modules=['exocomp'],
+    packages=find_packages(),
     author='Joshua D. Lothringer',
     author_email='jlothringer@stsci.edu',
     description='A tool for exoplanet atmospheric abundance computations.',
@@ -23,7 +24,6 @@ setup(
         'pandas',
         'easychem',
         'scipy',
-        'matplotlib',
-        'random'
+        'matplotlib'
     ],
 )

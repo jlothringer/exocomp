@@ -887,7 +887,7 @@ class Abund:
         if s is None:
             #
             #if asymmetric errorbars given, use fmin
-            if all(isinstance(value, list) for value in self.species_errs.values()):
+            if self.species_errs is not None and all(isinstance(value, list) for value in self.species_errs.values()):
                 if fit_refvol:
                     popt = fmin(fit_species_loss, [0.5,0.5,-0.1], args = (None,self.species_abunds,self.species_errs))
                     best_fit = fit_species(range(len(self.species_abunds)),popt[0],popt[1],popt[2])       
@@ -960,7 +960,7 @@ class Abund:
                 fig,ax = plt.subplots()
                 if self.species_errs is None:
                     ax.plot(self.species_abunds.keys(),self.species_abunds.values(),'ko',label='Data')
-                elif all(isinstance(value, list) for value in self.species_errs.values()):
+                elif self.species_errs is not None and all(isinstance(value, list) for value in self.species_errs.values()):
                     lower_err = [self.species_errs[key][0] for key in self.species_errs.keys()]
                     upper_err = [self.species_errs[key][1] for key in self.species_errs.keys()]
                     asymmetric_errors = [lower_err, upper_err]
@@ -1017,7 +1017,7 @@ class Abund:
             abunds = [[vals[i] for key, vals in self.species_errs.items()] for i in samp]
             #print(np.shape(abunds))
             #print(abunds[0])
-            print(f'Running on {s} samples... May take a moment if >10')
+            print(f'Running on {posterior_samples} samples... May take a moment if >10')
             for i, n in enumerate(samp):
                 a = abunds[i]
                 if fit_refvol:
@@ -1098,38 +1098,38 @@ class Abund:
                 ax[1].set_xlabel('C/O')
                 ax[0].set_ylabel('Probability')      
                 
-            fig,ax = plt.subplots()
-            ax.plot(self.species_abunds.keys(),self.species_errs.values(),'ko',alpha=0.025)
+                fig,ax = plt.subplots()
+                ax.plot(self.species_abunds.keys(),self.species_errs.values(),'ko',alpha=0.025)
+        
     
-
-            if fit_refvol:
-                highco = fit_species(range(len(self.species_abunds)),mhs_med,cos_med+cos_high,refvol_med)
-                lowco = fit_species(range(len(self.species_abunds)),mhs_med,cos_med-cos_low,refvol_med)
-                highmh = fit_species(range(len(self.species_abunds)),mhs_med+mhs_high,cos_med,refvol_med)
-                lowmh = fit_species(range(len(self.species_abunds)),mhs_med-mhs_low,cos_med,refvol_med)
-                highrv = fit_species(range(len(self.species_abunds)),mhs_med,cos_med,refvol_med+refvol_high)
-                lowrv = fit_species(range(len(self.species_abunds)),mhs_med,cos_med,refvol_med-refvol_low)
-            
-                ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='b',
-                            yerr = (best_fit-np.min([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0),
-                                    np.max([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0)-best_fit),
-                            label=f'Best-Fit +/- 1-sig Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f}, R/V={popt[2]:.2f})\n at {T}K and {P} bars')  
-            else:
-                highco = fit_species(range(len(self.species_abunds)),mhs_med,cos_med+cos_high)
-                lowco = fit_species(range(len(self.species_abunds)),mhs_med,cos_med-cos_low)
-                highmh = fit_species(range(len(self.species_abunds)),mhs_med+mhs_high,cos_med)
-                lowmh = fit_species(range(len(self.species_abunds)),mhs_med-mhs_low,cos_med)
-            
-                ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='b',
-                            yerr = (best_fit-np.min([lowco,highco,lowmh,highmh],axis=0),
-                                    np.max([lowco,highco,lowmh,highmh],axis=0)-best_fit),
-                            label=f'Best-Fit +/- 1-sig Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f})\n at {T}K and {P} bars')  
+                if fit_refvol:
+                    highco = fit_species(range(len(self.species_abunds)),mhs_med,cos_med+cos_high,refvol_med)
+                    lowco = fit_species(range(len(self.species_abunds)),mhs_med,cos_med-cos_low,refvol_med)
+                    highmh = fit_species(range(len(self.species_abunds)),mhs_med+mhs_high,cos_med,refvol_med)
+                    lowmh = fit_species(range(len(self.species_abunds)),mhs_med-mhs_low,cos_med,refvol_med)
+                    highrv = fit_species(range(len(self.species_abunds)),mhs_med,cos_med,refvol_med+refvol_high)
+                    lowrv = fit_species(range(len(self.species_abunds)),mhs_med,cos_med,refvol_med-refvol_low)
                 
-            ax.set_xlabel('Species',fontsize=14)
-            ax.set_ylabel('Abundance (VMR)',fontsize=14)
-            ax.tick_params(labelsize=12)
-            ax.legend(fontsize=12) 
-            
+                    ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='b',
+                                yerr = (best_fit-np.min([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0),
+                                        np.max([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0)-best_fit),
+                                label=f'Best-Fit +/- 1-sig Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f}, R/V={popt[2]:.2f})\n at {T}K and {P} bars')  
+                else:
+                    highco = fit_species(range(len(self.species_abunds)),mhs_med,cos_med+cos_high)
+                    lowco = fit_species(range(len(self.species_abunds)),mhs_med,cos_med-cos_low)
+                    highmh = fit_species(range(len(self.species_abunds)),mhs_med+mhs_high,cos_med)
+                    lowmh = fit_species(range(len(self.species_abunds)),mhs_med-mhs_low,cos_med)
+                
+                    ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='b',
+                                yerr = (best_fit-np.min([lowco,highco,lowmh,highmh],axis=0),
+                                        np.max([lowco,highco,lowmh,highmh],axis=0)-best_fit),
+                                label=f'Best-Fit +/- 1-sig Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f})\n at {T}K and {P} bars')  
+                    
+                ax.set_xlabel('Species',fontsize=14)
+                ax.set_ylabel('Abundance (VMR)',fontsize=14)
+                ax.tick_params(labelsize=12)
+                ax.legend(fontsize=12) 
+                
                      
         #Save best fit M/H and C/O to object
         self.best_fit_mh = popt[0]

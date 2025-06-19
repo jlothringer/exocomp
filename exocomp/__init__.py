@@ -1,1 +1,1 @@
-# This file makes exocomp a Python package
+from .exocomp import Abund
