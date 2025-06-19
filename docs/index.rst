@@ -38,7 +38,7 @@ We also have compiled the ExoComp Table, which lists metallicity, C/O, and refra
    :caption: Contents:
 
    modules
-   notebooks/Tutorial_1
+   ExoComp Tutorial <Tutorial1>
    The ExoComp Table <https://jlothringer.github.io/exoplanet_datatable.html>
    
 Indices and tables
