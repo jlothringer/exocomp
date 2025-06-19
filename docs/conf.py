@@ -29,6 +29,7 @@ extensions = [
     'sphinx.ext.napoleon',      # For NumPy/Google style docstrings
     'sphinx.ext.autosummary',   # Auto-generates summary tables
     'sphinx.ext.intersphinx',   # Links to other documentation
+    'nbsphinx'
 ]
 
 # Napoleon settings (for NumPy-style docstrings)
