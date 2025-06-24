@@ -31,7 +31,9 @@ All of the above can be easily done with different solar (or stellar) abundance 
 * Asplund+ 2005
 * Caffau+ 2011
 
-We also have compiled the ExoComp Table, which lists metallicity, C/O, and refractory-to-volatile measurements from retrievals of exoplanets from direct, eclipse, and transmission spectroscopy.
+`Link to the code<https://github.com/jlothringer/exocomp>`_.
+  
+We also have compiled the `ExoComp Table<https://jlothringer.github.io/exoplanet_datatable.html>`_, which lists metallicity, C/O, and refractory-to-volatile measurements from retrievals of exoplanets from direct, eclipse, and transmission spectroscopy.
 
 .. toctree::
    :maxdepth: 1
