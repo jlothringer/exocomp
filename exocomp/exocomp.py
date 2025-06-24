@@ -15,6 +15,7 @@ from scipy.optimize import curve_fit,fmin
 import numpy as np
 import matplotlib.pyplot as plt
 import random
+import copy
 #import emcee
 
 #Tasks
@@ -217,27 +218,27 @@ class Abund:
         match solar:
             case 'Lodders25':
                 self.solar_abundances = self.Lodders25()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Asplund09':
                 self.solar_abundances = self.Asplund09()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Asplund05':
                 self.solar_abundances = self.Asplund09()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Asplund21':
                 self.solar_abundances = self.Asplund21()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Lodders20':
                 self.solar_abundances = self.Lodders20()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Lodders10':
                 self.solar_abundances = self.Lodders10()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Caffau11':
                 print('Using abundances from Caffau11, filling in \
                       elements not included with Asplund09')
                 self.solar_abundances = self.Caffau11()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case _:
                 print('Please define Abund.solar_abundances')
                 
@@ -245,7 +246,24 @@ class Abund:
         #will use self.solar as backup
 
         for key in abund_dict.keys():
-            solar_abundance[key] = abund_dict[key]
+            self.solar_abundances[key] = abund_dict[key]
+            
+        if self.bulk_abunds == None:
+            print('No bulk abundances to convert...')
+            #self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
+            return
+        
+        #not converting bulk abundances- that's not what we want to do
+        #kinda the opposite.
+        #print('Converting bulk abundances...')
+        for element in self.bulk_abunds:
+            #Conversion factor
+            factor = self.solar_abundances[element][0] - self.solar_abundances_orig[element][0] 
+            #print(factor,self.solar_abundances[element][0],self.solar_abundances_orig[element][0])
+            
+            #Convert
+            #self.bulk_abunds[element] = self.bulk_abunds[element] - factor #minus b/c increase/decrease in planet *relative to solar/star*
+        self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
         return
     
     def VMR_to_MMR(self, vmr_dict, mmw=2.3, replace_abunds=False):
@@ -386,27 +404,27 @@ class Abund:
         match self.solar:
             case 'Lodders25':
                 self.solar_abundances = self.Lodders25()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Asplund09':
                 self.solar_abundances = self.Asplund09()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Asplund05':
                 self.solar_abundances = self.Asplund09()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Asplund21':
                 self.solar_abundances = self.Asplund21()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Lodders20':
                 self.solar_abundances = self.Lodders20()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Lodders10':
                 self.solar_abundances = self.Lodders10()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case 'Caffau11':
                 print('Using abundances from Caffau11, filling in \
                       elements not included with Asplund09')
                 self.solar_abundances = self.Caffau11()
-                self.solar_abundances_orig = self.solar_abundances
+                self.solar_abundances_orig = copy.deepcopy(self.solar_abundances)
             case _:
                 print('Please define Abund.solar_abundances')
         print(f"Using {self.solar} solar abundances")
@@ -605,21 +623,35 @@ class Abund:
                 
         if self.bulk_abunds == None:
             self.solar_abundances = solar_new
-            self.solar_abundances_orig = solar_new
-            print('No bulk abundances to convert...')
+            self.solar_abundances_orig = copy.deepcopy(solar_new)
+            #print('No bulk abundances to convert...')
             return
         
         for element in self.bulk_abunds:
+            #Not converting - that's not what we want to be doing!
+            #print('Converting bulk abundances...')
             #Conversion factor
             factor = solar_new[element][0] - self.solar_abundances_orig[element][0] 
             #print(factor,solar_new[element][0],self.solar_abundances_orig[element][0])
             
             #Convert
-            self.bulk_abunds[element] = self.bulk_abunds[element] - factor #minus b/c increase/decrease in planet *relative to solar/star*
+            #self.bulk_abunds[element] = self.bulk_abunds[element] - factor #minus b/c increase/decrease in planet *relative to solar/star*
             
         self.solar_abundances = solar_new
-        self.solar_abundances_orig = solar_new
+        self.solar_abundances_orig = copy.deepcopy(solar_new)
         return
+    
+    def solar_ratio_calc(self):
+        #output inferred metallicity, C/O, relative to solar or whatever we're assuming for abundances
+        if self.bulk_abunds is None:
+            print('Need to define bulk_abunds, either manually or through convert_species_abunds')
+            return
+        self.solar_ratios = {}
+        self.solar_ratios_err = {}
+        for i,key in enumerate(self.bulk_abunds.keys()):
+            self.solar_ratios[key] = self.bulk_abunds[key] - self.solar_abundances[key][0]
+            self.solar_ratios_err[key] = np.sqrt(np.max(self.bulk_errs[key])**2 + self.solar_abundances[key][1]**2)
+        return self.solar_ratios, self.solar_ratios_err
     
 
     def init_ec(self):
@@ -1015,6 +1047,7 @@ class Abund:
             samp = random.sample(list(inds),posterior_samples)
             fits = []
             abunds = [[vals[i] for key, vals in self.species_errs.items()] for i in samp]
+            sigma = np.std(abunds,axis=0)
             #print(np.shape(abunds))
             #print(abunds[0])
             print(f'Running on {posterior_samples} samples... May take a moment if >10')
@@ -1022,11 +1055,11 @@ class Abund:
                 a = abunds[i]
                 if fit_refvol:
                     popt,pcov = curve_fit(fit_species,range(len(self.species_abunds)),
-                              a,
+                              a, absolute_sigma=False, sigma=sigma,
                               p0=[0.5,0.5,-0.1])
                 else:
                     popt,pcov = curve_fit(fit_species,range(len(self.species_abunds)),
-                              a,
+                              a, absolute_sigma=False, sigma=sigma,
                               p0=[0.5,0.5])
                 fits.append(list(popt))
             self.fits = fits
@@ -1099,7 +1132,7 @@ class Abund:
                 ax[0].set_ylabel('Probability')      
                 
                 fig,ax = plt.subplots()
-                ax.plot(self.species_abunds.keys(),self.species_errs.values(),'ko',alpha=0.025)
+                ax.plot(self.species_abunds.keys(),self.species_errs.values(),'o',color='grey',alpha=0.025)
         
     
                 if fit_refvol:
@@ -1110,7 +1143,7 @@ class Abund:
                     highrv = fit_species(range(len(self.species_abunds)),mhs_med,cos_med,refvol_med+refvol_high)
                     lowrv = fit_species(range(len(self.species_abunds)),mhs_med,cos_med,refvol_med-refvol_low)
                 
-                    ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='b',
+                    ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='#1f77b4', linewidth=2, markersize=11,
                                 yerr = (best_fit-np.min([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0),
                                         np.max([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0)-best_fit),
                                 label=f'Best-Fit +/- 1-sig Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f}, R/V={popt[2]:.2f})\n at {T}K and {P} bars')  
@@ -1281,7 +1314,7 @@ class Abund:
             "Cu": (4.33, 0.04),
             "Zn": (4.70, 0.60),
             "Ga": (3.16, 0.02),
-            "Ge": (3.68, 0.03)  # Presumed from periodic order
+            "Ge": (3.68, 0.03)
         }
             
         return solar_abundances
@@ -1323,7 +1356,7 @@ class Abund:
         }   
         return solar_abundances
     
-    def Lodders10(self):
+    def Lodders10(self): #why is there two?
         solar_abundances = {
             "H": (12.00,0.0),
             "He": (10.925, 0.02),
