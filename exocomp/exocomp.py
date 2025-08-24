@@ -144,7 +144,8 @@ class Abund:
     def __init__(self, bulk_abunds=None, species_abunds=None, 
                  bulk_errs=None, species_errs=None, 
                  species_type='VMR', 
-                 solar='Lodders25',retrieval=None):
+                 solar='Asplund09',retrieval=None,
+                 save_plots = False, plotname = "exocomp"):
         
         self.__version__ = "0.1.0"
 
@@ -156,6 +157,7 @@ class Abund:
         self.solar = solar
         self.retrieval = retrieval
         self.solar_abundances = None
+        self.save_plots = save_plots
         
         self.possible_solars = ['Lodders25','Asplund09',
                                 'Lodders20','Asplund21',
@@ -206,10 +208,20 @@ class Abund:
                 self.mh_type = '(O+C)/H' 
                 self.co_type = 'MH_Preserve'     
                 self.solar = 'Asplund09'   
+            case 'HyDRA': #Ramkumar et al. 2025
+                self.mh_type = '(O+C)/H' 
+                self.co_type = 'MH_Preserve'     
+                self.solar = 'Asplund21'  
             #case 'Aurora': #Welbanks & Madhusudhan 2021
                 #self.mh_type = 'O/H'
                 #self.co_type = 'C/H'
                 #self.solar = 'Asplund09'
+            #ARCiS - oof - chubb+ 2022 - dunno how I'll implement that...
+#            For a C/O above solar, we adjust the oxygen abundance
+#               and keep carbon at solar abundances, while for a C/O below
+#               solar, we adjust the carbon abundance and keep oxygen at solar
+#               abundances. This simulates the removal of these elements dur-
+#               ing the formation or evolution of the planet.
            # case 'NEMESIS':
             
            # case 'Hydra':
@@ -289,6 +301,117 @@ class Abund:
         if replace_abunds:
             self.species_abunds = vmr_dict
         return vmr_dict
+    
+    def count_metallicity(self, rv=False):
+        self.define_molecules()
+        
+        total = 0.0
+        total_err_up = 0.0
+        total_err_down = 0.0
+        
+        oxygen= 0.0
+        oxygen_err_up = 0.0
+        oxygen_err_down = 0.0
+        
+        carbon = 0.0
+        carbon_err_up = 0.0
+        carbon_err_down = 0.0
+        
+        ref = 0.0
+        ref_err_up = 0.0
+        ref_err_down = 0.0
+        
+        for i,key in enumerate(self.species_abunds):
+            try:
+                s = len(self.species_errs[key])
+                if s == 2: # asymmetric errors
+                    s = None # don't treat as posterior
+            except TypeError:
+                s = 1
+                
+            total += self.molecules[key][0]*10**self.species_abunds[key]
+            oxygen += self.molecules[key][1]*10**self.species_abunds[key]
+            carbon += self.molecules[key][2]*10**self.species_abunds[key]
+            ref += (self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]
+            
+            
+            # Logs in the errors is getting confusing, just do things in linear space and convert back.
+            
+            if s == 1:
+                total_err_up += ((self.molecules[key][0]*10**(self.species_abunds[key]+self.species_errs[key])) - (self.molecules[key][0]*10**self.species_abunds[key]))**2
+                total_err_down += ((self.molecules[key][0]*10**self.species_abunds[key]) - (self.molecules[key][0]*10**(self.species_abunds[key]-self.species_errs[key])))**2
+                
+                oxygen_err_up += ((self.molecules[key][1]*10**(self.species_abunds[key]+self.species_errs[key])) - (self.molecules[key][1]*10**self.species_abunds[key]))**2
+                oxygen_err_down += ((self.molecules[key][1]*10**self.species_abunds[key]) - (self.molecules[key][1]*10**(self.species_abunds[key]-self.species_errs[key])))**2
+
+                carbon_err_up += ((self.molecules[key][2]*10**(self.species_abunds[key]+self.species_errs[key])) - (self.molecules[key][2]*10**self.species_abunds[key]))**2
+                carbon_err_down += ((self.molecules[key][2]*10**self.species_abunds[key]) - (self.molecules[key][2]*10**(self.species_abunds[key]-self.species_errs[key])))**2
+                
+                ref_err_up += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2])) \
+                                *10**(self.species_abunds[key]+self.species_errs[key]))  \
+                               - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]))**2
+                ref_err_down += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]) \
+                                 - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**(self.species_abunds[key]-self.species_errs[key])))**2
+                
+            if s is None:
+                total_err_up += ((self.molecules[key][0]*10**(self.species_abunds[key]+self.species_errs[key][1])) - (self.molecules[key][0]*10**self.species_abunds[key]))**2
+                total_err_down += ((self.molecules[key][0]*10**self.species_abunds[key]) - (self.molecules[key][0]*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
+                
+                oxygen_err_up += ((self.molecules[key][1]*10**(self.species_abunds[key]+self.species_errs[key][1])) - (self.molecules[key][1]*10**self.species_abunds[key]))**2
+                oxygen_err_down += ((self.molecules[key][1]*10**self.species_abunds[key]) - (self.molecules[key][1]*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
+
+                carbon_err_up += ((self.molecules[key][2]*10**(self.species_abunds[key]+self.species_errs[key][1])) - (self.molecules[key][2]*10**self.species_abunds[key]))**2
+                carbon_err_down += ((self.molecules[key][2]*10**self.species_abunds[key]) - (self.molecules[key][2]*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
+                
+                ref_err_up += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2])) \
+                                *10**(self.species_abunds[key]+self.species_errs[key][1]))  \
+                               - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]))**2
+                ref_err_down += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]) \
+                                 - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
+                     
+
+        #Errors are summed in quadratrem but still need to take sqrt! 
+        total_err_up = np.sqrt(total_err_up)
+        total_err_down = np.sqrt(total_err_down)
+        
+        oxygen_err_up = np.sqrt(oxygen_err_up)
+        oxygen_err_down = np.sqrt(oxygen_err_down)
+        
+        carbon_err_up = np.sqrt(carbon_err_up)
+        carbon_err_down = np.sqrt(carbon_err_down)
+            
+            
+        #calculate solar heavy metal number fraction from chosen definition
+        solar_heavy = 0.0
+        for i,key in enumerate(self.solar_abundances):
+            if key in ['H','He']:
+                continue
+            solar_heavy += 10**self.solar_abundances[key][0]
+            
+        log_metallicity = np.log10(total / (solar_heavy/1e12))
+        #log_metallicity_up = np.log10(np.sqrt(total_err_up) / (solar_heavy/1e12))
+        #log_metallicity_down = np.log10(np.sqrt(total_err_down) / (solar_heavy/1e12))
+        log_metallicity_up = np.log10((total + total_err_up)/ (solar_heavy/1e12)) - np.log10(total / (solar_heavy/1e12))
+        log_metallicity_down = np.log10(total/ (solar_heavy/1e12)) - np.log10((total-total_err_down)/ (solar_heavy/1e12))
+        
+        co = carbon/oxygen
+        
+        #co_up = co * np.sqrt((np.sqrt(carbon_err_up)/carbon)**2 + (np.sqrt(oxygen_err_down)/oxygen)**2)
+        #co_down = co * np.sqrt((np.sqrt(carbon_err_down)/carbon)**2 + (np.sqrt(oxygen_err_up)/oxygen)**2)
+     
+        co_up = co * np.sqrt((carbon_err_up/carbon)**2 + (oxygen_err_down/oxygen)**2)
+        co_down = co * np.sqrt((carbon_err_down/carbon)**2 + (oxygen_err_up/oxygen)**2)
+        
+        ref_vol = ref / (total-ref)
+        #Na K solar ref / C O solar vol
+        solar_ref = (10**self.solar_abundances['Na'][0] + 10**self.solar_abundances['K'][0]) / (10**self.solar_abundances['C'][0] + 10**self.solar_abundances['O'][0]) 
+        ref_vol_solar = ref_vol/solar_ref
+        # Have to manually calculate a solar refractory abundance to compare to, since we'll be using different
+        # atoms each time...
+            
+        print(f"log10 Metallicity = {log_metallicity} +{log_metallicity_up} -{log_metallicity_down}")
+        print(f"C/O= {co} +{co_up} -{co_down}")
+        return
     
     def convert_bulk_abundance(self,mh,co,rv=0.0,mh_err=0.0,co_err=0.0,rv_err=0.0,solar = None):
         """Convert bulk abundance parameters to elemental abundances with error propagation.
@@ -1012,13 +1135,13 @@ class Abund:
                    #print((best_fit-np.min([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0),
                    #         np.max([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0)-best_fit))
                     try:
-                        ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='b',
+                        ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='#1f77b4',linewidth=2, markersize=11,
                                     yerr = (best_fit-np.min([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0),
                                             np.max([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0)-best_fit),
-                                    label=f'Best-Fit +/- 1-sig Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f}, R/V={popt[2]:.2f})\n at {T}K and {P} bars')        
+                                    label=f'Best-Fit Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f}, R/V={popt[2]:.2f})\n at {T}K and {P} bars')        
                     except ValueError:
                         print('Unable to plot errorbars from M/H, C/O, R/V fit')
-                        ax.plot(self.species_abunds.keys(),best_fit,'X',color='b',
+                        ax.plot(self.species_abunds.keys(),best_fit,'X',color='#1f77b4',linewidth=2, markersize=11,
                                     label=f'Best-Fit Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f}, R/V={popt[2]:.2f})\n at {T}K and {P} bars')     
           
                 else:
@@ -1028,18 +1151,21 @@ class Abund:
                     lowmh = fit_species(range(len(self.species_abunds)),popt[0]-errs[0],popt[1])
 
                     try:
-                        ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='b',
+                        ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='#1f77b4',linewidth=2, markersize=11,
                                     yerr = (best_fit-np.min([lowco,highco,lowmh,highmh],axis=0),np.max([lowco,highco,lowmh,highmh],axis=0)-best_fit),
-                                    label=f'Best-Fit +/- 1-sig Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f})\n at {T}K and {P} bars')
+                                    label=f'Best-Fit Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f})\n at {T}K and {P} bars')
                     except ValueError:
                         print('Unable to plot errorbars from M/H, C/O, R/V fit')
-                        ax.plot(self.species_abunds.keys(),best_fit,'X',color='b',
+                        ax.plot(self.species_abunds.keys(),best_fit,'X',color='#1f77b4',linewidth=2, markersize=11,
                                     label=f'Best-Fit Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f})\n at {T}K and {P} bars')                          
         
                 ax.set_xlabel('Species',fontsize=14)
                 ax.set_ylabel('Abundance (VMR)',fontsize=14)
                 ax.tick_params(labelsize=12)
                 ax.legend(fontsize=12) 
+                
+                if self.save_plots is True:
+                    plt.savefig(f"{plotname}_abund_fit.pdf")
             
         # If given posteriors
         else:
@@ -1095,12 +1221,12 @@ class Abund:
                 pcov = fits
                 best_fit = fit_species(range(len(self.species_abunds)),mhs_med,cos_med)
                 
-
-            print('---')
-            print('Median Fit Abundances')
-            print('---')
-            for i, key in enumerate(self.species_abunds.keys()):
-                print(f'{key}: {best_fit[i]}')
+            if plot_it is False:
+                print('---')
+                print('Median Fit Abundances')
+                print('---')
+                for i, key in enumerate(self.species_abunds.keys()):
+                    print(f'{key}: {best_fit[i]}')
            
                 
             if plot_it:
@@ -1129,10 +1255,13 @@ class Abund:
 
                 ax[0].set_xlabel('[M/H]')
                 ax[1].set_xlabel('C/O')
-                ax[0].set_ylabel('Probability')      
+                ax[0].set_ylabel('Probability')  
+                
+                if self.save_plots is True:
+                    plt.savefig(f"{plotname}_abund_fit_hist.pdf")
                 
                 fig,ax = plt.subplots()
-                ax.plot(self.species_abunds.keys(),self.species_errs.values(),'o',color='grey',alpha=0.025)
+                ax.plot(self.species_abunds.keys(),self.species_errs.values(),'o',color='grey',alpha=0.015,rasterized=True)
         
     
                 if fit_refvol:
@@ -1146,24 +1275,44 @@ class Abund:
                     ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='#1f77b4', linewidth=2, markersize=11,
                                 yerr = (best_fit-np.min([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0),
                                         np.max([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0)-best_fit),
-                                label=f'Best-Fit +/- 1-sig Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f}, R/V={popt[2]:.2f})\n at {T}K and {P} bars')  
+                                label=f'Best-Fit Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f}, R/V={popt[2]:.2f})\n at {T}K and {P} bars')  
+                    
+                    tmp = (best_fit-np.min([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0),
+                            np.max([lowco,highco,lowmh,highmh,lowrv,highrv],axis=0)-best_fit)
+                    print('---')
+                    print('Median Fit Abundances')
+                    print('---')
+                    for i, key in enumerate(self.species_abunds.keys()):
+                        print(f'{key}: {best_fit[i]} + {tmp[0][i]} - {tmp[1][i]}')
+                        
                 else:
                     highco = fit_species(range(len(self.species_abunds)),mhs_med,cos_med+cos_high)
                     lowco = fit_species(range(len(self.species_abunds)),mhs_med,cos_med-cos_low)
                     highmh = fit_species(range(len(self.species_abunds)),mhs_med+mhs_high,cos_med)
                     lowmh = fit_species(range(len(self.species_abunds)),mhs_med-mhs_low,cos_med)
                 
-                    ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='b',
+                    ax.errorbar(self.species_abunds.keys(),best_fit,fmt='X',color='#1f77b4',linewidth=2, markersize=11,
                                 yerr = (best_fit-np.min([lowco,highco,lowmh,highmh],axis=0),
                                         np.max([lowco,highco,lowmh,highmh],axis=0)-best_fit),
-                                label=f'Best-Fit +/- 1-sig Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f})\n at {T}K and {P} bars')  
+                                label=f'Best-Fit Chem. Eq. \n([M/H]={popt[0]:.2f}, C/O={popt[1]:.2f})\n at {T}K and {P} bars')  
+                    
+                    tmp = (best_fit-np.min([lowco,highco,lowmh,highmh],axis=0),
+                            np.max([lowco,highco,lowmh,highmh],axis=0)-best_fit)
+                    print('---')
+                    print('Median Fit Abundances')
+                    print('---')
+                    for i, key in enumerate(self.species_abunds.keys()):
+                        print(f'{key}: {best_fit[i]} + {tmp[0][i]} - {tmp[1][i]}')
+                    
                     
                 ax.set_xlabel('Species',fontsize=14)
                 ax.set_ylabel('Abundance (VMR)',fontsize=14)
                 ax.tick_params(labelsize=12)
                 ax.legend(fontsize=12) 
                 
-                     
+                if self.save_plots is True:
+                    plt.savefig(f"{plotname}_abund_fit.pdf")
+                   
         #Save best fit M/H and C/O to object
         self.best_fit_mh = popt[0]
         self.best_fit_co = popt[1]
@@ -1283,7 +1432,7 @@ class Abund:
 
     def Lodders20(self):
         solar_abundances = {
-            "H": 12.00,
+            "H": (12.00, 0.00),
             "He": (10.994, 0.02),
             "Li": (3.35, 0.03),
             "Be": (1.40, 0.04),
@@ -1520,4 +1669,69 @@ class Abund:
             'VO': 50.9415 + 15.999
         }
         return
+
+    def define_molecules(self):
+        self.molecules = {
+            # Atoms
+            "Na": (1, 0, 0),
+            "K": (1, 0, 0),
+            "Fe": (1, 0, 0),
+            "Ti": (1, 0, 0),
+            "Si": (1, 0, 0),
+            "Mg": (1, 0, 0),
+            
+            # Water and simple oxygen compounds
+            "H2O": (1, 1, 0),      # Water - 1 heavy, 1 oxygen, 0 carbon
+            "O2": (2, 2, 0),       # Molecular oxygen - 2 heavy, 2 oxygen, 0 carbon
+            "O3": (3, 3, 0),       # Ozone - 3 heavy, 3 oxygen, 0 carbon
+            
+            # Carbon compounds
+            "CO": (2, 1, 1),       # Carbon monoxide - 2 heavy, 1 oxygen, 1 carbon
+            "CO2": (3, 2, 1),      # Carbon dioxide - 3 heavy, 2 oxygen, 1 carbon
+            "CH4": (1, 0, 1),      # Methane - 1 heavy, 0 oxygen, 1 carbon
+            "C2H2": (2, 0, 2),     # Acetylene - 2 heavy, 0 oxygen, 2 carbon
+            "C2H4": (2, 0, 2),     # Ethylene - 2 heavy, 0 oxygen, 2 carbon
+            "C2H6": (2, 0, 2),     # Ethane - 2 heavy, 0 oxygen, 2 carbon
+            "HCN": (2, 0, 1),      # Hydrogen cyanide - 2 heavy, 0 oxygen, 1 carbon
+            
+            # Nitrogen compounds
+            "N2": (2, 0, 0),       # Molecular nitrogen - 2 heavy, 0 oxygen, 0 carbon
+            "NH3": (1, 0, 0),      # Ammonia - 1 heavy, 0 oxygen, 0 carbon
+            "NO": (2, 1, 0),       # Nitric oxide - 2 heavy, 1 oxygen, 0 carbon
+            "NO2": (3, 2, 0),      # Nitrogen dioxide - 3 heavy, 2 oxygen, 0 carbon
+            
+            # Sulfur compounds
+            "H2S": (1, 0, 0),      # Hydrogen sulfide - 1 heavy, 0 oxygen, 0 carbon
+            "SO2": (3, 2, 0),      # Sulfur dioxide - 3 heavy, 2 oxygen, 0 carbon
+            
+            # Silicon compounds
+            "SiO": (2, 1, 0),      # Silicon monoxide - 2 heavy, 1 oxygen, 0 carbon
+            "SiH4": (1, 0, 0),     # Silane - 1 heavy, 0 oxygen, 0 carbon
+            
+            # Phosphorus compounds
+            "PH3": (1, 0, 0),      # Phosphine - 1 heavy, 0 oxygen, 0 carbon
+            
+            # Alkali metals
+            "NaH": (1, 0, 0),      # Sodium hydride - 1 heavy, 0 oxygen, 0 carbon
+            "KH": (1, 0, 0),       # Potassium hydride - 1 heavy, 0 oxygen, 0 carbon
+            
+            # Titanium compounds
+            "TiO": (2, 1, 0),      # Titanium oxide - 2 heavy, 1 oxygen, 0 carbon
+            "TiH": (1, 0, 0),      # Titanium hydride - 1 heavy, 0 oxygen, 0 carbon
+            
+            # Vanadium compounds
+            "VO": (2, 1, 0),       # Vanadium oxide - 2 heavy, 1 oxygen, 0 carbon
+            
+            # Iron compounds
+            "FeH": (1, 0, 0),      # Iron hydride - 1 heavy, 0 oxygen, 0 carbon
+            
+            # Noble gases (monatomic)
+            "He": (1, 0, 0),       # Helium - 1 heavy, 0 oxygen, 0 carbon
+            "Ne": (1, 0, 0),       # Neon - 1 heavy, 0 oxygen, 0 carbon
+            "Ar": (1, 0, 0),       # Argon - 1 heavy, 0 oxygen, 0 carbon
+            "Kr": (1, 0, 0),       # Krypton - 1 heavy, 0 oxygen, 0 carbon
+            "Xe": (1, 0, 0),       # Xenon - 1 heavy, 0 oxygen, 0 carbon
+        }
+        return
+
 
