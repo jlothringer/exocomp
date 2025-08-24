@@ -8,7 +8,7 @@ ____________________________
 
 Install easyCHEM `here <https://easychem.readthedocs.io/en/latest/>`_.
 
-There are some gcc dependencies that mean you should install in yourself.
+There are some gcc dependencies that mean you should install it yourself.
 
 Step 2: Clone ExoComp
 ____________________________
