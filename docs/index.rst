@@ -8,7 +8,7 @@ Welcome to ExoComp!
 
 .. image:: _images/Exocomp_Banner_Dark_BG.png
    :alt: Project logo
-   :width: 300px
+   :width: 700px
    :align: center
 	   
 `Many different retrieval codes exist <https://ui.adsabs.harvard.edu/abs/2023RNAAS...7...54M/abstract>`__, each with different methods for quantifying atmospheric compositions. In general, chemical equilibrium retrievals quote a metallicity and C/O, but the way in which these are defined varies. For some codes, metallicity is parameterized by O/H, while C/O adjusts the C/H ratio. But in other codes, it is the opposite!

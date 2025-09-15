@@ -59,4 +59,4 @@ exclude_patterns = []
 #html_theme = 'alabaster'
 html_theme = 'sphinx_rtd_theme'  # or 'alabaster', 'classic', etc.
 html_static_path = ['_static']
-html_logo = 'ExoComp_logo.png'
+html_logo = '_images/Exocomp_Square_Dark_BG.png'
