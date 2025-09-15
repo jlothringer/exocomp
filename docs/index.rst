@@ -6,7 +6,7 @@
 Welcome to ExoComp!
 ===================================
 
-.. image:: ExoComp_logo_Crop.png
+.. image:: _images/Exocomp_Banner_Dark_BG.png
    :alt: Project logo
    :width: 300px
    :align: center
