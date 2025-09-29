@@ -18,44 +18,15 @@ import random
 import copy
 #import emcee
 
-#Tasks
-#   1) Convert molecular measurements to bulk abundances [mostly done, make version with refractories]
-#        e.g., take log10(H2O)_vmr and convert
-#   2) Convert VMRs to MMRs and vice versa
-#   3) Convert elemental ratios relative to solar to different definitions of solar or stellar [mostly done, add more solar defs]
-#       a) Add stellar abund option
-#   4) Given [M/H], C/O, elemental abund, P, and T, give expected molecular abundances
-#       4.5) And vice-versa - given molecular abundances, P, T, and solar definition, give best-fitting [M/H] & C/O [done, make version with refractories]
-#           -A bit better than just adding up molecules... because you may be missing some.
-#           -So given H2O and CO2, you can get [M/H] and C/O!
+## Quick Test
+#g = Abund()
+#test_abunds = g.predict_abund(1.0,0.1,1000,1,adjust_C=True,verbose=True)
 
-#todo: 1) add refractory to volatile fits [done]
-#2) add stellar [done]
-#3) do some real-world examples [done]
-#4) write up 
-#5) make PEP compliant 
-#6) look at obs and find pop means 
-#7) make table publishable [and add uncertainty to mass and temp] 
-#8) Make mcmc version 
-#9) make posterior version [done]
-#9) Make version where neither C or O are individually adjusted for C/O, but rather both! preserving metallicity! [done]
-#10) add goodness of fit info... will want to choose between ways to handle C/O and whether adding ref/vol is justified [done]
-#11) enhanced errorbars - upper/lower limits and asymm bars
-#12) create test block/routine
-#13) look at posteriors of W-178b
-#14) The presence of gaseous H2O sets a limit of ref/vol for cloudy atmospheres
-#   -lol if only ref-O enriched a planet atmosphere, we'd only see O in refractory phase (more the most part)
+##Setting abundances to fit to be those at 10x solar metallicity and C/O = 0.1
+#g.species_abunds = test_abunds
+#popt,pcov,best_fit_abunds = g.convert_species_abunds(1000, 1, plot_it=True, adjust_C=True) # Need to add errors or you get weird errorbars on M/H and C/O!
 
-##Test
-## M/H= 1.0 and C/O = 0.5 at T=1000 and P = 1
-#{'H2O': -2.193862599311742, 'CO': -2.9951664932143895,'CO2': -4.957449831706032} for Asplund 09
-#{'H2O': -2.196454926078874, 'CO': -2.95559683423187, 'CO2': -4.9118293333092335} for Lodders 25
 
-#Depends on how you change C/O! Esp. when there are other elements setting M/H
-#g = Abund(species_abunds={'H2O':-2.96,'CH4':-9.05,'CO2':-5.81,'K':-8.07,'Na':-9.31},species_errs={'H2O':0.31,'CH4':2.1,'CO2':1.31,'K':0.58,'Na':1.77}) #W17b
-#g.convert_species_abunds(1271, 5e-3)
-#versus 
-#g.convert_species_abunds(1271, 5e-3,adjust_C=False)
 
 
 class Abund:
@@ -107,6 +78,7 @@ class Abund:
     convert_bulk_abundance() : given bulk abundance properties, calculate elemental abundances
     convert_solar()  : convert self.bulk_abundances to another definition of solar
     convert_species_abunds() : given species abundances, calculate bulk abundances
+    count_metallicity() : add up species abundances to infer bulk abundances
     predict_abund() : given bulk abundance properties, calculate species abundances
     init_ec() : utility function to initialize easyCHEM with proper solar abundances
     import_masses() : read in molecular masses for MMW calculation 
@@ -123,10 +95,11 @@ class Abund:
     best_fit_abund : best-fit species abundances from convert_species_abunds
     Asplund09 : elemental abundance definitions from Asplund, M., et al. (2009). ARA&A, 47, 481
     Asplund21 : elemental abundance definitions from Asplund, M., et al. (2021). A&A, 653, A141  
-    Asplund05 : elemental abundance definitions from 
-    Lodders10 : elemental abundance definitions from 
+    Asplund05 : elemental abundance definitions from Asplund, M., et al. (2005). 
+    Lodders10 : elemental abundance definitions from Lodders, K. (2010). Astro and Space Sci. Pro.
     Lodders20 : elemental abundance definitions from Lodders, K. (2020). Space Sci. Rev., 216, 44
-    Caffau11 : elemental abundance definitions from 
+    Lodders25 : elemental abundance definitions from Lodders, K. et al. (2025). Space Sci. Rev., 221, 2
+    Caffau11 : elemental abundance definitions from Caffau, E. (2011). Solar Physics, 268, 2
     
     Examples
     --------
@@ -338,37 +311,43 @@ class Abund:
             # Logs in the errors is getting confusing, just do things in linear space and convert back.
             
             if s == 1:
-                total_err_up += ((self.molecules[key][0]*10**(self.species_abunds[key]+self.species_errs[key])) - (self.molecules[key][0]*10**self.species_abunds[key]))**2
-                total_err_down += ((self.molecules[key][0]*10**self.species_abunds[key]) - (self.molecules[key][0]*10**(self.species_abunds[key]-self.species_errs[key])))**2
-                
-                oxygen_err_up += ((self.molecules[key][1]*10**(self.species_abunds[key]+self.species_errs[key])) - (self.molecules[key][1]*10**self.species_abunds[key]))**2
-                oxygen_err_down += ((self.molecules[key][1]*10**self.species_abunds[key]) - (self.molecules[key][1]*10**(self.species_abunds[key]-self.species_errs[key])))**2
-
-                carbon_err_up += ((self.molecules[key][2]*10**(self.species_abunds[key]+self.species_errs[key])) - (self.molecules[key][2]*10**self.species_abunds[key]))**2
-                carbon_err_down += ((self.molecules[key][2]*10**self.species_abunds[key]) - (self.molecules[key][2]*10**(self.species_abunds[key]-self.species_errs[key])))**2
-                
-                ref_err_up += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2])) \
-                                *10**(self.species_abunds[key]+self.species_errs[key]))  \
-                               - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]))**2
-                ref_err_down += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]) \
-                                 - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**(self.species_abunds[key]-self.species_errs[key])))**2
+                try:
+                    total_err_up += ((self.molecules[key][0]*10**(self.species_abunds[key]+self.species_errs[key])) - (self.molecules[key][0]*10**self.species_abunds[key]))**2
+                    total_err_down += ((self.molecules[key][0]*10**self.species_abunds[key]) - (self.molecules[key][0]*10**(self.species_abunds[key]-self.species_errs[key])))**2
+                    
+                    oxygen_err_up += ((self.molecules[key][1]*10**(self.species_abunds[key]+self.species_errs[key])) - (self.molecules[key][1]*10**self.species_abunds[key]))**2
+                    oxygen_err_down += ((self.molecules[key][1]*10**self.species_abunds[key]) - (self.molecules[key][1]*10**(self.species_abunds[key]-self.species_errs[key])))**2
+    
+                    carbon_err_up += ((self.molecules[key][2]*10**(self.species_abunds[key]+self.species_errs[key])) - (self.molecules[key][2]*10**self.species_abunds[key]))**2
+                    carbon_err_down += ((self.molecules[key][2]*10**self.species_abunds[key]) - (self.molecules[key][2]*10**(self.species_abunds[key]-self.species_errs[key])))**2
+                    
+                    ref_err_up += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2])) \
+                                    *10**(self.species_abunds[key]+self.species_errs[key]))  \
+                                   - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]))**2
+                    ref_err_down += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]) \
+                                     - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**(self.species_abunds[key]-self.species_errs[key])))**2
+                except TypeError:
+                    print("NoneType error: I think you need to supply uncertainties for the measurements?")
                 
             if s is None:
-                total_err_up += ((self.molecules[key][0]*10**(self.species_abunds[key]+self.species_errs[key][1])) - (self.molecules[key][0]*10**self.species_abunds[key]))**2
-                total_err_down += ((self.molecules[key][0]*10**self.species_abunds[key]) - (self.molecules[key][0]*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
-                
-                oxygen_err_up += ((self.molecules[key][1]*10**(self.species_abunds[key]+self.species_errs[key][1])) - (self.molecules[key][1]*10**self.species_abunds[key]))**2
-                oxygen_err_down += ((self.molecules[key][1]*10**self.species_abunds[key]) - (self.molecules[key][1]*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
-
-                carbon_err_up += ((self.molecules[key][2]*10**(self.species_abunds[key]+self.species_errs[key][1])) - (self.molecules[key][2]*10**self.species_abunds[key]))**2
-                carbon_err_down += ((self.molecules[key][2]*10**self.species_abunds[key]) - (self.molecules[key][2]*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
-                
-                ref_err_up += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2])) \
-                                *10**(self.species_abunds[key]+self.species_errs[key][1]))  \
-                               - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]))**2
-                ref_err_down += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]) \
-                                 - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
-                     
+                try:
+                    total_err_up += ((self.molecules[key][0]*10**(self.species_abunds[key]+self.species_errs[key][1])) - (self.molecules[key][0]*10**self.species_abunds[key]))**2
+                    total_err_down += ((self.molecules[key][0]*10**self.species_abunds[key]) - (self.molecules[key][0]*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
+                    
+                    oxygen_err_up += ((self.molecules[key][1]*10**(self.species_abunds[key]+self.species_errs[key][1])) - (self.molecules[key][1]*10**self.species_abunds[key]))**2
+                    oxygen_err_down += ((self.molecules[key][1]*10**self.species_abunds[key]) - (self.molecules[key][1]*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
+    
+                    carbon_err_up += ((self.molecules[key][2]*10**(self.species_abunds[key]+self.species_errs[key][1])) - (self.molecules[key][2]*10**self.species_abunds[key]))**2
+                    carbon_err_down += ((self.molecules[key][2]*10**self.species_abunds[key]) - (self.molecules[key][2]*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
+                    
+                    ref_err_up += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2])) \
+                                    *10**(self.species_abunds[key]+self.species_errs[key][1]))  \
+                                   - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]))**2
+                    ref_err_down += (((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**self.species_abunds[key]) \
+                                     - ((self.molecules[key][0]-(self.molecules[key][1]+self.molecules[key][2]))*10**(self.species_abunds[key]-self.species_errs[key][0])))**2
+                except TypeError:
+                    print("NoneType error: I think you need to supply uncertainties for the measurements?")
+             
 
         #Errors are summed in quadratrem but still need to take sqrt! 
         total_err_up = np.sqrt(total_err_up)
@@ -977,7 +956,7 @@ class Abund:
         """
         
         if self.species_errs == None:
-            print("Consider adding errors/uncertainty to the provided measurements!")
+            print("WARNING: Consider adding errors/uncertainty to the provided measurements!")
         
         #Init easychem
         exo = self.init_ec()
