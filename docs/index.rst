@@ -33,7 +33,7 @@ All of the above can be easily done with different solar (or stellar) abundance 
 
 `Link to the code <https://github.com/jlothringer/exocomp>`__.
   
-We also have compiled the `ExoComp Table <https://jlothringer.github.io/LExACoM_MRT_Accepted.txt>`__, which lists metallicity, C/O, and refractory-to-volatile measurements from retrievals of exoplanets from direct, eclipse, and transmission spectroscopy.
+We also have compiled `The Library of Exoplanet Atmospheric Composition Measurements (LExACoM) Table <https://jlothringer.github.io/LExACoM_MRT_Accepted.txt>`__, which lists metallicity, C/O, and refractory-to-volatile measurements from retrievals of exoplanets from direct, eclipse, and transmission spectroscopy.
 
 .. toctree::
    :maxdepth: 1
@@ -48,7 +48,7 @@ We also have compiled the `ExoComp Table <https://jlothringer.github.io/LExACoM_
    modules
    ExoComp Tutorial <Tutorial1>
    Population Comparison <population_comparison>
-   The ExoComp Table <https://jlothringer.github.io/LExACoM_MRT_Accepted.txt>
+   The Library of Exoplanet Atmospheric Composition Measurements Table <https://jlothringer.github.io/LExACoM_MRT_Accepted.txt>
    
 Indices and tables
 ==================
