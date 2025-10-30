@@ -1,0 +1,86 @@
+Planet,Reference,Status,Geometry,Obs,C/O,C/O Lower,C/O Upper,Metallicity,Metallicity Lower,Metallicity Upper,Metallicity Type,Metallicity Solar,log10 R/V,R/V Lower,R/V Upper,R/V Type,Retrieval Type,Notes,Mass,Mass Lower,Mass Upper,T_eq,T_eq Lower,T_eq Upper,Stellar Metallicity,Stellar Metallicity Lower,Stellar Metallicity Upper,Stellar Mass,Stellar Mass Lower,Stellar Mass Upper
+WASP-39 b,Welbanks et al. 2025,In Prep,Transit,NIRISS/SOSS+NIRSpec/PRISM+NIRCAM/F322W2+NIRCam/F444W+NIRSpec/G395H,0.25,0.2,0.25,1.05,0.2,0.2,(O+C)/H,Solar,,,,,Custom,Estimated from Wiser et al. Fig. 6,0.28,0.03,0.03,1150,14,14,0.01,0.09,0.09,0.93,0.03,0.03
+WASP-96 b,Wang et al. 2025,In Prep,Transit,NIRISS/SOSS+VLT/FORS2+WFC3/G141,0.57,0.12,0.07,0.01,0.52,0.46,C/H,Solar,1.48,0.62,0.57,(Na+K+S/O),pRT,,0.48,0.03,0.03,1286,40,40,0.14,0.19,0.19,1.06,0.09,0.09
+WASP-94A b,Mukherjee et al. 2025,Submitted,Transit,NIRISS/SOSS,0.34,0.2,0.2,0.31,0.32,0.32,(O+C)/H,Solar,,,,,PICASO,WASP-94Ab: Accounts for limb asymmetry- otherwise biased! Also see Ahrer et al. 2025,0.5,0.13,0.13,1543,0,0,0.22,0.1,0.1,1.14,0.11,0.19
+WASP-178 b,Lothringer et al. 2025,Published,Transit,WFC3/G280+WFC3/G102+WFC3/G141+NIRSpec/G395H,0.01,0.01,0.01,1.47,1.1,0.28,O/H,Stellar,-1.56,0.3,0.97,Si/O,pRT,uses arguments to say stellar abundance is approx. solar,1.66,0.12,0.12,2469,60,60,0.21,0.16,0.16,2.07,0.11,0.11
+HD 189733 b,Fu et al. 2024,Published,Transit,NIRCAM/F322W2+NIRCam/F444W,0.2,0.2,0,0.6020599913,0.1249387366,0.09691001301,(O+C)/H,Solar,,,,,CHIMERA,,1.13,0.08,0.08,1193,11,11,0.02,0,0,0.79,0.08,0.08
+HD 209458 b,Xue et al. 2024,Published,Transit,NIRCAM/F322W2+NIRCam/F444W,0.08,0.05,0.09,0.4771212547,0.1760912591,0.3679767853,C/H,Solar,,,,,PLATON,,0.73,0.04,0.04,1469,12,12,0.01,0,0,1.23,0.09,0.09
+HD 149026 b,Bean et al. 2023,Published,Eclipse,NIRCAM/F322W2+NIRCam/F444W,0.84,0.03,0.03,2.09,0.35,0.32,O/H,Solar,,,,,PLATON,,0.38,0.06,0.06,1694,37,69,0.32,0,0,1.42,0.33,0.33
+HD 149026 b,Gagnebin et al. 2024,Published,Eclipse,NIRCAM/F322W2+NIRCam/F444W,0.67,0.27,0.06,1.146128036,0.2688453123,0.3679767853,O/H,Solar,,,,,PICASO,PICASO used to make a grid- not directly in a retrieval.,0.38,0.06,0.06,1694,37,69,0.32,0,0,1.42,0.33,0.33
+WASP-18 b,Coulombe et al. 2023,Published,Eclipse,NIRISS/SOSS,0.6,0.6,0,0.01283722471,0.3175765486,0.2968338811,O/H,Solar,,,,,SCARLET,,10.2,0.35,0.35,2504,70,77,0.107,0.08,0.08,1.29,0.06,0.06
+WASP-18 b,Brogi et al. 2023,Published,Eclipse,Gemini/IGRINS,0.34,0.34,0,0.48,0.29,0.33,O/H,Solar,,,,,CHIMERA,,10.2,0.35,0.35,2504,70,77,0.107,0.08,0.08,1.29,0.06,0.06
+WASP-77 A b,Line et al. 2021,Published,Eclipse,Gemini/IGRINS,0.59,0.08,0.08,-0.48,0.13,0.15,(O+C)/H,Solar,,,,,CHIMERA,,1.667,0.00045,0.00045,1691,25,25,0,0,0,0.9,0.06,0.07
+WASP-77 A b,Reggiani et al. 2022,Published,Eclipse,Gemini/IGRINS,0.59,0.08,0.08,-0.72,0.12,0.14,O/H,Stellar,,,,,CHIMERA,,1.667,0.00045,0.00045,1691,25,25,0,0,0,0.9,0.06,0.07
+WASP-77 A b,August et al. 2023,Published,Eclipse,NIRSpec/G395H,0.36,0.09,0.1,-0.91,0.16,0.24,O/H,Solar,,,,,PLATON,,1.667,0.00045,0.00045,1691,25,25,0,0,0,0.9,0.06,0.07
+WASP-121 b,Smith et al. 2024b,Published,Eclipse,Gemini/IGRINS,0.7,0.1,0.07,-0.17,0.33,0.4,(O+C)/H,Stellar,0.583198774,0.2487450228,0.2889574988,R/O,CHIMERA,,1.157,0.07,0.07,2449,8,8,0.13,0.09,0.09,1.36,0.08,0.07
+WASP-121 b,Pelletier et al. 2025,Published,Eclipse,VLT/CRIRES++VLT/ESPRESSO,0.87,0.06,0.04,0.79,0.26,0.28,(O+C)/H,Solar,-1.531478917,0.138766936,0.1476635511,Fe/O,SCARLET,,1.157,0.07,0.07,2449,8,8,0.13,0.09,0.09,1.36,0.08,0.07
+WASP-121 b,Evans-Soma et al. 2025,Published,Eclipse,NIRSpec/G395H,0.92,0.03,0.02,0.86,0.16,0.14,O/H,Stellar,-0.864,0.15,0.21,Si/((C+O)/2),ATMO,C/H ~ 24x solar,1.157,0.07,0.07,2449,8,8,0.13,0.09,0.09,1.36,0.08,0.07
+WASP-121 b,Gapp et al. 2025,Published,Transit,NIRSpec/G395H,0.978,0.006,0.004,1.16,0.08,0.06,O/H,Solar,-1.07,0.14,0.11,Si/((C+O)/2),ATMO,C/H ~ 72x solar,1.157,0.07,0.07,2449,8,8,0.13,0.09,0.09,1.36,0.08,0.07
+HD 80606 b,Sikora et al. 2025,Submitted,Eclipse,NIRSpec/G395H,0.69,0.14,0.14,-0.11,0.55,0.48,O/H,Solar,,,,,pRT,,4.38,0.74,0.74,405,7,7,0.35,0,0,1.15,0.27,0.27
+WASP-127 b,Kanumalla et al. 2024,Published,Eclipse,Gemini/IGRINS,0.68,0.68,0,1.59,0.3,0.3,O/H,Solar,,,,,CHIMERA,,0.1647,0.0172,0.0214,1422,24,24,0.193,0.014,0.014,0.95,0.02,0.02
+WASP-80 b,Wiser et al. 2025,In Press,Eclipse,NIRCAM/F322W2+NIRCam/F444W+MIRI/LRS,0.48,0.07,0.06,0.55,0.1,0.12,(O+C)/H,Solar,,,,,ScCHIMERA,,0.538,0.036,0.035,825,19,19,0.13,0.17,0.15,0.58,0.05,0.05
+GJ 3470 b,Beatty et al. 2024,Published,Transit,NIRCAM/F322W2+NIRCam/F444W,0.35,0.1,0.1,2.1,0.12,0.12,(O+C)/H,Solar,,,,,ScCHIMERA,,0.043734,0.00472,0.00472,661,96,96,0.2,0.1,0.1,0.54,0.04,0.05
+WASP-107 b,Sing et al. 2024,Published,Transit,NIRSpec/G395H,0.51,0.21,0.27,1.7,0.13,0.14,(O+C)/H,Solar,,,,,ATMO,,0.096,0.005,0.005,745,17,17,0.02,0.09,0.09,0.68,0.02,0.02
+WASP-107 b,Welbanks et al. 2024,Published,Transit,NIRCAM/F322W2+NIRCam/F444W+MIRI/LRS,0.33,0.05,0.06,1.09,0.09,0.17,(O+C)/H,Solar,,,,,ScCHIMERA,,0.096,0.005,0.005,745,17,17,0.02,0.09,0.09,0.68,0.02,0.02
+WASP-76 b,Mansfield et al. 2024,Published,Eclipse,Gemini/IGRINS,0.59,0.14,0.13,-0.74,0.17,0.23,(O+C)/H,Solar,,,,,ScCHIMERA,,0.894,0.013,0.014,2226,122,122,0.366,0.053,0.053,1.46,0.02,0.02
+WASP-69 b,Schlawin et al. 2024,Published,Eclipse,NIRCAM/F322W2+NIRCam/F444W+MIRI/LRS,0.75,0.1,0.19,0.96,0.17,0.2,(O+C)/H,Solar,,,,,CHIMERA,,0.29,0.03,0.03,988,18,18,0.15,0,0,0.98,0.14,0.14
+GQ Lup b,Xuan et al. 2024,Published,Direct,Keck/KPIC,0.7,0.02,0.01,0.39,0.22,0.15,C/H,Solar,,,,,pRT,Mass is range given in SupJup paper,25,15,15,100,100,100,0.35,0.01,0.01,0.7,0.18,0.16
+kap And b,Xuan et al. 2024,Published,Direct,Keck/KPIC,0.58,0.04,0.05,-0.1,0.2,0.14,C/H,Solar,,,,,pRT,,22,1.047,23.042,100,200,100,0.36,0.09,0.09,2.6,0.2,0.2
+GSC 6214-210 b,Xuan et al. 2024,Published,Direct,Keck/KPIC,0.7,0.06,0.07,0.15,0.3,0.18,C/H,Solar,,,,,pRT,,21,1,1,100,0,0,-0.06,0.01,0.01,0.694,0.06,0.11
+2M0122 b,Xuan et al. 2024,Published,Direct,Keck/KPIC,0.37,0.08,0.08,-0.3,0.22,0.15,C/H,Solar,,,,,pRT,Alt name 2MASS J01225093-2439505,25,0,0,100,0,0,0,0,0,0.35,0.02,0.02
+ROXs 42B b,Xuan et al. 2024,Published,Direct,Keck/KPIC,0.48,0.08,0.08,0,0.52,0.23,C/H,Solar,,,,,pRT,,13,0,0,100,0,0,0,0,0,-99,-99,-99
+DH Tau b,Xuan et al. 2024,Published,Direct,Keck/KPIC,0.54,0.05,0.06,-0.3,0.2,0.15,C/H,Solar,,,,,pRT,,12,3,10,100,0,0,0,0,0,0.33,0,0
+ROXs 12 b,Xuan et al. 2024,Published,Direct,Keck/KPIC,0.54,0.05,0.05,-0.3,0.2,0.15,C/H,Solar,,,,,pRT,,19,4,4,100,0,0,0.14,0.01,0.01,0.87,0.08,0.08
+HR 8799 e,Molliere et al. 2020,Published,Direct,VLT/GRAVITY,0.6,0.07,0.08,0.48,0.25,0.29,C/H,Solar,,,,,pRT,,10,4,7,108,50,50,0.5,0,0,1.51,0.02,0.04
+beta Pic b,Nowak et al. 2020,Published,Direct,VLT/GRAVITY,0.44,0.07,0.05,0.66,0.11,0.13,C/H,Solar,,,,,pRT,,11.7,2.1,2.3,100,0,0,-0.21,0.02,0.03,1.795,0.027,0.027
+HR 8799 b,Nasedkin et al. 2024,Published,Direct,VLT/GRAVITY,0.78,0.04,0.03,0.96,0.08,0.08,C/H,Solar,,,,,pRT,Bayesian Model Average,7,2,4,100,0,0,0.47,0,0,1.5,0.3,0.3
+HR 8799 c,Nasedkin et al. 2025,Published,Direct,VLT/GRAVITY,0.66,0.01,0.01,1.27,0.06,0.05,C/H,Solar,,,,,pRT,Bayesian Model Average,10,3,3,100,0,0,0.47,0,0,1.5,0.3,0.3
+HR 8799 d,Nasedkin et al. 2026,Published,Direct,VLT/GRAVITY,0.6,0.06,0.04,1.2,0.2,0.2,C/H,Solar,,,,,pRT,Bayesian Model Average,10,3,3,100,0,0,0.47,0,0,1.5,0.3,0.3
+HR 8799 e,Nasedkin et al. 2027,Published,Direct,VLT/GRAVITY,0.88,0.02,0.02,1.9,0.2,0.1,C/H,Solar,,,,,pRT,Bayesian Model Average,10,4,7,100,50,50,0.5,0,0,1.51,0.02,0.04
+AF Lep b,Zhang et al. 2023,Published,Direct,VLT/SPHERE,0.7,0.12,0.09,1.6,0.2,0.2,C/H,Solar,,,,,pRT,Phot+M23&D23 Spec M and R priors,3.2,0.6,0.7,100,300,300,0.19,0.02,0.02,1.2,0.06,0.06
+AF Lep b,Palma-Bifani et al. 2024,Published,Direct,VLT/SPHERE,0.5,0.1,0.1,0.7,0.1,0.1,(O+C)/H,Solar,,,,,ForMoSA,,3.2,0.6,0.7,100,300,300,0.19,0.02,0.02,1.2,0.06,0.06
+AF Lep b,Balmer et al. 2025,Published,Direct,VLT/GRAVITY,0.55,0.1,0.1,0.75,0.25,0.25,C/H,Solar,,,,,pRT,Using adopted values,3.2,0.6,0.7,100,300,300,0.19,0.02,0.02,1.2,0.06,0.06
+PDS 70 b,Hsu et al. 2024,Published,Direct,Keck/KPIC,0.28,0.12,0.2,-0.2,0.5,0.8,C/H,Solar,,,,,pRT,,3,1,1,100,27,26,0.11,0.01,0.01,0.76,0.02,0.02
+AB Pic b,Gandhi et al. 2025,Published,Direct,VLT/CRIRES+,0.59,0.01,0.01,0.54,0.08,0.08,O/H,Solar,,,,,HyDRA,Converted from free retrieval results,13.5,0.5,0.5,100,0,0,0.04,0.02,0.02,0.9,0.1,0.1
+WASP-166 b,Mayo et al. 2025,Submitted,Transit,NIRISS/SOSS+NIRSpec/PRISM,0.282,0.053,0.078,1.57,0.18,0.17,(O+C)/H,Solar,,,,,POSEIDON,It looks like metallicity is defined relative to solar but interpreted relative to stellar,0.101,0.005,0.005,1273,30,30,0.19,0.05,0.05,1.19,0.06,0.06
+TrES-4 b,Meech et al. 2025,Published,Transit,NIRSpec/G395H,0.35,0.1,0.12,-0.15,0.26,0.27,C/H,Solar,,,,,POSEIDON,Test II - other retrievals consistent within a reasonable range,0.78,0.19,0.19,1708,22,22,0.14,0,0,1.08,0.38,0.38
+WASP-15 b,Kirk et al. 2025,Published ,Transit,NIRSpec/G395H,0.53,0.15,0.09,1.34,0.26,0.28,C/H,Solar,,,,,pRT,Using TIBERIUS R~100 data; manually updated stellar mass uncertainty,0.54,0.29,0.29,1628,29,29,0.17,0.11,0.11,1.18,0.15,0.16
+HAT-P-14 b,Liu et al. 2025,Published,Transit,NIRISS/SOSS+NIRSpec/G395H,0.41,0.2,0.24,-0.08,0.98,0.89,C/H,Solar,,,,,pRT,Manually updated stellar mass and metallicity,8.84,0.63,0.63,1920,32,32,0.11,0.08,0.08,1.386,0.045,0.045
+TOI-5205 b,Cañas et al. 2025,Submitted,Transit,NIRSpec/PRISM,1.3,0.4,0.4,-0.76,0.1,0.17,O/H,Solar,,,,,POSEIDON,POSEIDON retrieval includes stellar contamination,1.08,0.06,0.06,736,15,15,0,0,0,0.39,0.02,0.02
+MASCARA-1 b,Ramkumar et al. 2025,Published,Eclipse,VLT/CRIRES+,0.74,0.14,0.11,-0.33,0,1,O/H,Solar,0.32,1.49,1.17,Fe/(C+O),Gibson,Pre+Post Eclipse- ref/vol from free chem,3.7,0.9,0.9,2717,2,2,0.15,0.15,0.15,1.9,0.07,0.06
+51 Eri b,Brown-Sevilla et al. 2023,Published,Direct,VLT/SPHERE,0.38,0.09,0.09,0.26,0.3,0.3,C/H,Solar,,,,,pRT,Nominal retrieval,3,1,1,100,0,0,0.13,0.02,0.03,1.75,0.05,0.05
+GQ Lup b,González Picos et al. 2025,Published,Direct,VLT/CRIRES+,0.5,0.01,0.01,0.5,0.17,0.16,C/H,Solar,,,,,pRT,Also isotope ratios; mass is range given in paper,25,15,15,100,0,0,0.35,0.01,0.01,0.7,0.18,0.16
+HIP 65 b,Bazinet et al. 2024,Published,Eclipse,Gemini/IGRINS,0.72,0.3,0.13,-0.76,0.48,0.42,(O+C)/H,Solar,,,,,SCARLET,,3.213,0.08,0.08,1411,15,15,0.18,0.08,0.08,0.781,0.027,0.027
+HD 209458 b,Verma et al. 2025,In Press,Transit,NIRCAM/F322W2+NIRCam/F444W+HST/WFC3+HST/STIS,0.56,0.12,0.1,0.13,0.16,0.2,O/H,Solar,,,,,SANSAR,Looked at changing O versus C for metallicity and C/O,0.73,0.04,0.04,1469,12,12,0.01,0,0,1.23,0.09,0.09
+HD 209458 b,Bachmann et al. 2025,In Press,Transit,NIRCAM/F322W2+NIRCam/F444W+HST/WFC3+HST/STIS,0.054,0.032,0.08,0.1,0.4,0.41,C/H,Solar,,,,,pRT,Did not include STIS data- actually agrees with SANSAR in that case,0.73,0.04,0.04,1469,12,12,0.01,0,0,1.23,0.09,0.09
+HD 189733 b,Zhang et al. 2025,Published,Eclipse,NIRCAM/F322W2+NIRCam/F444W,0.43,0.05,0.06,0.68,0.11,0.15,(O+C)/H,Solar,,,,,PLATON 2.0,,1.13,0.08,0.08,1193,11,11,0.02,0,0,0.79,0.08,0.08
+HD 189733 b,Zhang et al. 2025,Published,Transit,NIRCAM/F322W2+NIRCam/F444W,0.41,0.12,0.13,0.53,0.12,0.13,(O+C)/H,Solar,,,,,PLATON 2.0,,1.13,0.08,0.08,1193,11,11,0.02,0,0,0.79,0.08,0.08
+KELT-20 b,Finnerty et al. 2025,Published,Transit,Keck/KPIC,0.1,0.1,0.4,1,0.7,0.7,(O+C)/H,Solar,,,,,pRT,easychem abundances so direct O/H and C/H; manually updated stellar metallicity with Talens et al,3.382,2,1,2259.47,73,73,-0.02,0.07,0.07,1.76,0.19,0.14
+Tau Boo b,Panwar et al. 2024,Published,Eclipse,VLT/CRIRES,0.95,0.31,0.06,-0.21,0.87,1.66,(O+C)/H,Solar,,,,,GENESIS,Free chemistry; guessing at metallicity definition,5.95,0.28,0.28,1682,100,100,0.264,0.02,0.02,1.32,0.185,0.244
+Tau Boo b,Panwar et al. 2024,Published,Eclipse,VLT/CRIRES,0.75,0.21,0.26,-0.69,0.62,1.29,(O+C)/H,Solar,,,,,GENESIS,Equilibrium chemistry; guessing at metallicity definition,5.95,0.28,0.28,1682,100,100,0.264,0.02,0.02,1.32,0.185,0.244
+WASP-19 b,Saha et al. 2025,Submitted,Eclipse,NIRSpec/PRISM,0.94,0.03,0.03,1.7,0.7,1.2,(O+C)/H,Solar,,,,,pRT,M/H and C/O quoted from free retrieval,1.154,0.08,0.08,2113,29,29,0.04,0.03,0.24,0.97,0.1,0.09
+WASP-33 b ,Finnerty et al. 2023,Published,Eclipse,KEck/KPIC,0.8,0.2,0.1,0.74,0.44,0.44,(O+C)/H,Solar,,,,,pRT,From chem eq retrievals; converted range to interval; paper says some resevoirs of O may exist; measured OH though and that is very helpful,2.093,0.14,0.14,2784,41,41,0.1,0.1,0.1,1.653,0.19,0.35
+WASP-43 b,Yang et al. 2024,Published,Eclipse,MIRI/LRS,0.8,0.2,0.1,0.2,0.4,0.61,(O+C)/H,Solar,,,,,NEMESIS,Quoted from free retrieval,1.78,0.1,0.1,1379,9,9,-0.05,0.17,0.17,0.58,0.04,0.05
+WASP-43 b,Lesjak et al. 2023,Published,Eclipse,VLT/CRIRES+,0.78,0.09,0.09,0.2,0.06,0.07,C/H,Solar,,,,,pRT,,1.78,0.1,0.1,1379,9,9,-0.05,0.17,0.17,0.58,0.04,0.05
+WASP-77 A b,Smith et al. 2024,Published,Eclipse,NIRSpec/G395H+Gemini/IGRINS,0.57,0.06,0.06,-0.61,0.09,0.1,C/H,Solar,,,,,CHIMERA,,1.667,0.00045,0.00045,1691,25,25,0,0,0,0.9,0.06,0.07
+WASP-94A b,Ahrer et al. 2025,Published,Transit,NIRSpec/G395H,0.49,0.13,0.08,0.34,0.16,0.12,(O+C)/H,Solar,,,,,pRT,Other retrievals agree; quoting value compared to solar at end of 5.1.2,0.5,0.13,0.13,1543,0,0,0.22,0.1,0.1,1.14,0.11,0.19
+WASP-189 b,Lesjak et al. 2025,Published,Eclipse,VLT/CRIRES+,0.32,0.14,0.41,1.4,0.6,1.39,O/H,Solar,,,,,Custom,Sets Fe/H also to metallicity I think; Fe and CO only species constrained,1.99,0.14,0.16,2636.36,34,27,0.29,0.13,0.13,2.03,0.07,0.07
+WASP-121 b,Pelletier et al. 2025,Submitted,Eclipse,NIRISS/SOSS,0.82,0.09,0.05,1.24,0.35,0.37,(O+C)/H,Solar,0.19,0.16,0.16,(V+Si+Na+K+Fe)/(O+C+N),SCARLET,Using Ag != 0 retrieval,1.157,0.07,0.07,2449,8,8,0.13,0.09,0.09,1.36,0.08,0.08
+V1298 Tau b,Barat et al. 2025,Published,Transit,NIRSpec/G395H,0.22,0.05,0.06,0.6,0.6,0.4,(O+C)/H,Solar,,,,,PICASO,Free retrieval results; Large difference in inferred mass compared to RV,0.64,0.19,0.19,668,22,22,0.1,0.15,0.15,1.26,0.06,0.06
+WD 0806 b,Voyer et al. 2025,Published,Eclipse,MIRI/LRS,0.34,0.06,0.06,-0.13,0.06,0.07,(O+C)/H,Solar,,,,,TauREx,Metallicity includes N too; uses Asplund 09 abundances,8,2,2,100,0,0,-99,-99,-99,-99,-99,-99
+KELT-7 b,Ahrer et al. 2025,In Press,Transit,NIRSpec/G395H,0.585,0.16,0.16,0.93,0.93,0.27,C/H,Solar,,,,,pRT,Also used POSEIDON!,1.39,0.22,0.22,2048,27,27,0.139,0.081,0.075,1.535,0.054,0.066
+#,Notes,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,"HAT-P-18: a NIRISS/SOSS spectrum, but no CO prevents a C/O ratio (Fournier-Tondreau et al. 2024)",,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,"WASP-17b: Precise molecular abundances exist, just not quoted as a C/O or metallicity in Louie et al. 2024 (transit) or Gressier et al. 2024 (eclipse). Retrievals not done in chem eq. ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,"WASP-76b: Hood et al. 2024 get some constraints on C/O from high-res, but a little loose. Also metallicity is hard in UHJs... We added Megan's paper, using the chem eq. grid",,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,WASP-107b and GJ 3470b are Neptune-like,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,WASP-94Ab: Accounts for limb asymmetry- otherwise biased!,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,"WASP-96b: Star has crazy high C/O, like almost C/O=1. Roughly solar Fe/H tho",,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,HIP 67522 b (Thao et al. 2024) - Only free retrievals,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,GJ 504b: Bonnefoy et al. 2018 uses pRT before it put in a retrieval for a forward model grid... No TP parameterization,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,"GJ 3090: Ahrer et al. constrain >100 solar, but no bounded spectral features (also all free)",,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,"WASP-39b: no direct metallicity quoted in Espinoza+ 25 (just ""consistent with 10x solar"") and unsure which to quote for Chen et al.",,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,"WASP-43b: Bartelt et al.: No metallicity quoted, but C/O upper limit. ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,"WASP-76b: Gandhi et al. 2024 put loose, but helpful constraints on O/H and C/O, but using CARMENES and HST",,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,WASP-96b: Taylor et al. free retrieval,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#,WASP-103b: Shi et al. HST+CFHT,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
