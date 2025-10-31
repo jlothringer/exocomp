@@ -6,4 +6,6 @@ ExoComp is a toolkit with functions and utilities for normalizing measurements f
 
 ExoComp is named after a sentient mining robot in [Star Trek: TNG](https://memory-alpha.fandom.com/wiki/Exocomp).
 
+Find the paper, now on [arXiv here[(https://arxiv.org/abs/2510.26785).
+
 https://exocomp.readthedocs.io/en/latest/
