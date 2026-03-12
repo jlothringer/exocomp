@@ -35,6 +35,8 @@ All of the above can be easily done with different solar (or stellar) abundance 
   
 We also have compiled `The Library of Exoplanet Atmospheric Composition Measurements (LExACoM) Table <https://jlothringer.github.io/LExACoM_MRT_Accepted.txt>`__, which lists metallicity, C/O, and refractory-to-volatile measurements from retrievals of exoplanets from direct, eclipse, and transmission spectroscopy.
 
+Check out the paper, now `in AJ here<https://iopscience.iop.org/article/10.3847/1538-3881/ae1b8e>`__.
+
 .. toctree::
    :maxdepth: 1
    :caption: Installation:
