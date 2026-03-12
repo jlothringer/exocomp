@@ -31,11 +31,11 @@ All of the above can be easily done with different solar (or stellar) abundance 
 * Asplund+ 2005
 * Caffau+ 2011
 
-`Link to the code <https://github.com/jlothringer/exocomp>`__.
+You can find the code `on Github here <https://github.com/jlothringer/exocomp>`__.
   
 We also have compiled `The Library of Exoplanet Atmospheric Composition Measurements (LExACoM) Table <https://jlothringer.github.io/LExACoM_MRT_Accepted.txt>`__, which lists metallicity, C/O, and refractory-to-volatile measurements from retrievals of exoplanets from direct, eclipse, and transmission spectroscopy.
 
-Check out the paper, now `in AJ here<https://iopscience.iop.org/article/10.3847/1538-3881/ae1b8e>`__.
+Check out the paper, `now in AJ here <https://iopscience.iop.org/article/10.3847/1538-3881/ae1b8e>`__.
 
 .. toctree::
    :maxdepth: 1
