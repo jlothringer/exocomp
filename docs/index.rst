@@ -54,8 +54,8 @@ Change Log:
    ExoComp Tutorial <Tutorial1>
    Population Comparison (paper version) <population_comparison>
    Population Comparison (latest version) <population_comparison2>
-   The LExACoM Table of Measurements (Version 1, from paper) <https://jlothringer.github.io/LExACoM_MRT_Accepted.txt>
-   The LExACoM Table of Measurements (Version 2, thru 8/28/26) <https://jlothringer.github.io/LExACoM_Measurements_8_28_26.csv>
+   The LExACoM Table of Measurements (paper version)  <https://jlothringer.github.io/LExACoM_MRT_Accepted.txt>
+   The LExACoM Table of Measurements (latest version (thru 8/28/26)) <https://jlothringer.github.io/LExACoM_Measurements_8_28_26.csv>
    
 Indices and tables
 ==================
