@@ -1,7 +1,7 @@
 Installation
 ============
 
-Consider doing installation in a proper conda environment.
+Consider doing installation in a proper conda environment. Exocomp works with Python >=3.10.
 
 Step 1: Install easyCHEM
 ____________________________

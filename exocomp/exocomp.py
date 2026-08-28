@@ -275,7 +275,7 @@ class Abund:
             self.species_abunds = vmr_dict
         return vmr_dict
     
-    def count_metallicity(self, rv=False):
+    def count_metallicity(self, rv=False, sequester_O = False):
         self.define_molecules()
         
         total = 0.0
@@ -358,7 +358,13 @@ class Abund:
         
         carbon_err_up = np.sqrt(carbon_err_up)
         carbon_err_down = np.sqrt(carbon_err_down)
+        
+        # Add 22% oxygen in ref (Line 2021) if we want to account for sequestered O
+        if sequester_O is True:
+            oxygen = oxygen*(1/(1-0.22))
             
+            # Add missing ref O
+            total += oxygen * ((1/(1-0.22)) - 1)
             
         #calculate solar heavy metal number fraction from chosen definition
         solar_heavy = 0.0
@@ -1618,6 +1624,9 @@ class Abund:
             'Fe': 55.845,
             'Ti': 47.867,
             'V': 50.9415,
+            'Ni': 58.693,
+            'Mn': 54.93804,
+            'Cr': 52.9961,
         
             # Molecules
             'H2': 2 * 1.00784,

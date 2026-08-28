@@ -37,6 +37,9 @@ We also have compiled `The Library of Exoplanet Atmospheric Composition Measurem
 
 Check out the paper, `now in AJ here <https://iopscience.iop.org/article/10.3847/1538-3881/ae1b8e>`__.
 
+Change Log:
+*8/28/26: Update to ExoComp code to fix Pandas update that affect GroupBy functionality. Updated LExACoM to version 2.0 with new measurements through 8/28/2026. Let us know of any omissions or errors.
+
 .. toctree::
    :maxdepth: 1
    :caption: Installation:
@@ -49,8 +52,10 @@ Check out the paper, `now in AJ here <https://iopscience.iop.org/article/10.3847
 
    modules
    ExoComp Tutorial <Tutorial1>
-   Population Comparison <population_comparison>
-   The Library of Exoplanet Atmospheric Composition Measurements Table <https://jlothringer.github.io/LExACoM_MRT_Accepted.txt>
+   Population Comparison (paper version) <population_comparison>
+   Population Comparison (latest version) <population_comparison2>
+   The LExACoM Table of Measurements (Version 1, from paper) <https://jlothringer.github.io/LExACoM_MRT_Accepted.txt>
+   The LExACoM Table of Measurements (Version 2, thru 8/28/26) <https://jlothringer.github.io/LExACoM_Measurements_8_28_26.csv>
    
 Indices and tables
 ==================

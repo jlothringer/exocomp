@@ -1,4 +1,4 @@
 .. toctree::
    :maxdepth: 1
 
-   Population Comparison  </notebooks/population_comparison_paper.ipynb>
+   Population Comparison (paper version)  </notebooks/population_comparison_paper.ipynb>
