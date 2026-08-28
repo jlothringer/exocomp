@@ -38,7 +38,7 @@ We also have compiled `The Library of Exoplanet Atmospheric Composition Measurem
 Check out the paper, `now in AJ here <https://iopscience.iop.org/article/10.3847/1538-3881/ae1b8e>`__.
 
 Change Log:
-*8/28/26: Update to ExoComp code to fix Pandas update that affect GroupBy functionality. Updated LExACoM to version 2.0 with new measurements through 8/28/2026. Let us know of any omissions or errors.
+* 8/28/26: Update to ExoComp code to fix Pandas update that affect GroupBy functionality. Updated LExACoM to version 2.0 with new measurements through 8/28/2026. Let us know of any omissions or errors.
 
 .. toctree::
    :maxdepth: 1
